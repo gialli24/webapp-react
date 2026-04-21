@@ -1,0 +1,12 @@
+import { NavLink } from "react-router-dom";
+
+export default function AppHeader() {
+    return (
+        <header>
+            Header
+
+            <NavLink to="/">Movies</NavLink>
+            <NavLink to="/:movieId">Movie Details</NavLink>
+        </header>
+    )
+}
