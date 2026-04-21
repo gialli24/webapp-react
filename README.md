@@ -30,3 +30,9 @@ Made to localhost server made using express
 - AppFooter
 - MoviesList
 - MovieCard
+
+## Milestone 1
+
+- Mettiamo su un nuovo progetto React aiutandoci con Vite
+- Ripuliamo come sempre l’app da file e codice di esempio non necessari
+- Installiamo il necessario: React Router, Axios e Bootstrap (se volete utilizzarlo)
