@@ -6,7 +6,6 @@ export default function AppHeader() {
             Header
 
             <NavLink to="/">Movies</NavLink>
-            <NavLink to="/:movieId">Movie Details</NavLink>
         </header>
     )
 }

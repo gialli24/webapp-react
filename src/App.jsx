@@ -10,8 +10,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<DefaultLayout />}>
-            <Route path="/" element={<MoviesPage />} />
-            <Route path="/:movieId" element={<MovieDetails />} />
+            <Route index element={<MoviesPage />} />
+            <Route path="/movies/:movieId" element={<MovieDetails />} />
           </Route>
         </Routes>
       </BrowserRouter >

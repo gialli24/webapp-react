@@ -37,7 +37,7 @@ Made to localhost server made using express
 - Ripuliamo come sempre l’app da file e codice di esempio non necessari
 - Installiamo il necessario: React Router, Axios e Bootstrap (se volete utilizzarlo)
 
-# Milestone 2
+## Milestone 2
 
 - Creiamo un layout di base per la nostra applicazione ed impostiamo le rotte per le diverse pagine.
 
@@ -50,3 +50,8 @@ Made to localhost server made using express
 
 - Configuriamo l’app di backend (repo webapp-express) a ricevere chiamate dalla nostra applicazione React, installando e impostando il middleware CORS
 - Proviamo quindi ad effettuare una chiamata Ajax dalla home del progetto React, per ottenere la lista dei libri
+
+
+## Milestone 4
+
+- In ultimo, effettuiamo una chiamata AJAX dalla pagina di dettaglio per ottenere il dettaglio di un singolo film, comprese le sue recensioni
