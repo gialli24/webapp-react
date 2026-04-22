@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
+import ReviewsList from "../components/ReviewsList";
 
 export default function MovieDetails() {
 
@@ -63,20 +64,7 @@ export default function MovieDetails() {
 
                     <h2>Recensioni</h2>
 
-                    <div className="row">
-                        {
-                            movie.reviews?.map(review => (
-                                <div className="col-md-6" key={review.id}>
-                                    <div className="card">
-                                        <div className="card-body">
-                                            <h5 className="card-title">{review.vote}/5</h5>
-                                            <p>{review.review}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))
-                        }
-                    </div>
+                    <ReviewsList reviews={movie.reviews} />
                 </div>
             </section>
         </main >
