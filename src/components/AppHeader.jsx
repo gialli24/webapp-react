@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function AppHeader() {
     return (
@@ -10,7 +10,10 @@ export default function AppHeader() {
 
                         <div className="d-flex justify-content-between align-items-center gap-2 w-100">
 
-                            <h1>MoviesApp</h1>
+                            <Link to="/" className="navbar-brand">
+                                <h1>MoviesApp</h1>
+                            </Link>
+
 
                             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
                                 <span className="navbar-toggler-icon"></span>
