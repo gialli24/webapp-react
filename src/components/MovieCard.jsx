@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function MovieCard({ movie, setSelectedMovie }) {
 
-    const { id, image, title, description, release_date, duration } = movie;
+    const { id, image, title, description, release_date, duration, votes_avg } = movie;
     const releaseYear = new Date(release_date).getFullYear();
 
     return (
@@ -30,6 +30,9 @@ export default function MovieCard({ movie, setSelectedMovie }) {
                     </span>
                     <span>
                         {duration} min
+                    </span>
+                    <span>
+                        {votes_avg}
                     </span>
                 </div>
 

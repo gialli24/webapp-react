@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import MovieCard from "../components/MovieCard";
-import { Link } from "react-router-dom";
+import MovieModal from "../components/MovieModal";
 
 export default function MoviesPage() {
 
@@ -19,34 +19,8 @@ export default function MoviesPage() {
     return (
         <main>
 
-            <div className="modal fade" id="details-modal" tabIndex="-1">
-                <div className="modal-dialog modal-dialog-centered">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="exampleModalLabel">
-                                {selectedMovie.title}
-                            </h1>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            <p>{selectedMovie.description}</p>
-                        </div>
-                        <div className="modal-footer">
-                            <Link
-                                to={`/movies/${selectedMovie.id}`}
-                                onClick={() => {
-                                    const modalElement = document.getElementById('details-modal');
-                                    const modalInstance = bootstrap.Modal.getInstance(modalElement);
-                                    modalInstance?.hide();
-                                }}
-                                className="btn btn-primary"
-                            >
-                                Di più
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <MovieModal movie={selectedMovie} />
+
 
             <section id="movies-list">
                 <div className="container pt-5">
