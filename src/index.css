@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
 @import url(bootstrap);
+@import url(bootstrap-icons);
 
 * {
     font-family: "DM Sans", sans-serif;
@@ -37,14 +38,12 @@ a.app-nav-link.disabled {
     color: rgb(190, 190, 190);
 }
 
-.movie-img>img {
+.thumbnail>img {
     height: 250px;
     width: 100%;
 
     object-fit: cover;
     object-position: center;
-
-    border-radius: 1rem;
 }
 
 .jumbo>img {
@@ -52,4 +51,41 @@ a.app-nav-link.disabled {
     height: 350px;
     object-fit: cover;
     object-position: center;
+}
+
+.thumbnail {
+    position: relative;
+    overflow: hidden;
+
+    border-radius: 1rem;
+}
+
+.thumbnail .overlay {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    opacity: 0;
+
+    transition: .35s;
+
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.thumbnail .overlay:hover {
+    opacity: 1;
+}
+
+
+.thumbnail .overlay button {
+    width: 100%;
+    height: 100%;
+
+    background: none;
+    border: none;
+
+    color: white;
 }
