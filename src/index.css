@@ -30,3 +30,9 @@ a.app-nav-link {
 a.app-nav-link.active {
     font-weight: 500;
 }
+
+a.app-nav-link.disabled {
+    cursor: not-allowed;
+
+    color: rgb(190, 190, 190);
+}

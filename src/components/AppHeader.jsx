@@ -19,8 +19,9 @@ export default function AppHeader() {
 
                         <div className="collapse navbar-collapse justify-content-end gap-5 w-100" id="menu">
 
-                            <nav className="mb-4 mb-lg-0">
+                            <nav className="d-flex flex-column flex-lg-row gap-4 mb-4 mb-lg-0">
                                 <NavLink to="/" className="app-nav-link">Home</NavLink>
+                                <NavLink to="" className="app-nav-link disabled">About Us</NavLink>
                             </nav>
 
                             <form className="d-flex" role="search" onSubmit={(e) => e.preventDefault()}>
