@@ -17,24 +17,68 @@ export default function MovieDetails() {
 
 
     return (
-        <>
-            <h1>Movie Details {movieId}</h1>
+        <main>
+            <section id="details">
+                <div className="jumbo">
+                    <img src={import.meta.env.VITE_API_SERVER_ADDRESS + "/img/" + movie.image} alt={movie.title} />
+                </div>
 
-            <ul>
-                <li>Title: {movie.title}</li>
-                <li>Description: {movie.description}</li>
+                <div className="container py-4">
+                    <h2>{movie.title}</h2>
+                    <p>{movie.description}</p>
 
-                <li>
-                    Reviews:
-                    <ul>
+                    <div className="row">
+                        <div className="col">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h3>{movie.director}</h3>
+                                    <p>Regista</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="col">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h3>{movie.genre}</h3>
+                                    <p>Genere</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="col">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h3>{movie.duration} min</h3>
+                                    <p>Durata</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reviews">
+                <div className="container">
+
+                    <h2>Recensioni</h2>
+
+                    <div className="row">
                         {
                             movie.reviews?.map(review => (
-                                <li key={review.id}>{review.review}</li>
+                                <div className="col-md-6" key={review.id}>
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <h5 className="card-title">{review.vote}/5</h5>
+                                            <p>{review.review}</p>
+                                        </div>
+                                    </div>
+                                </div>
                             ))
                         }
-                    </ul>
-                </li>
-            </ul>
-        </>
+                    </div>
+                </div>
+            </section>
+        </main >
     )
 }
