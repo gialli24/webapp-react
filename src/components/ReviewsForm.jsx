@@ -5,6 +5,7 @@ import FormTextArea from "./FormTextArea";
 export default function ReviewsForm({ setRefreshReviews, movieId }) {
 
     const [submissionResponse, setSubmissionResponse] = useState({});
+    const [reviewHelp, setReviewHelp] = useState({});
 
     const [formData, setFormData] = useState({
         rating: 5,
@@ -14,6 +15,30 @@ export default function ReviewsForm({ setRefreshReviews, movieId }) {
 
     function handleSubmit(e) {
         e.preventDefault();
+
+
+        if (formData.review.length == 0) {
+            setReviewHelp(
+                {
+                    field: "review",
+                    type: "error",
+                    message: "Review is required"
+                });
+
+            return;
+        }
+
+        if (formData.review.length < 10) {
+            setReviewHelp(
+                {
+                    field: "review",
+                    type: "error",
+                    message: "Review must be at least 10 characters long"
+                }
+            );
+
+            return;
+        }
 
         const endpoint = import.meta.env.VITE_API_SERVER_ADDRESS + "/reviews";
 
@@ -27,6 +52,11 @@ export default function ReviewsForm({ setRefreshReviews, movieId }) {
             .then(res => res.json())
             .then(data => {
                 setSubmissionResponse(data);
+                setFormData({
+                    rating: 5,
+                    review: "",
+                    movie_id: movieId
+                });
 
                 if (data.type === "success") {
                     setRefreshReviews(true);
@@ -49,9 +79,9 @@ export default function ReviewsForm({ setRefreshReviews, movieId }) {
                 placeholder="Write here"
                 name="review"
                 id="review"
-                required={true}
                 value={formData.review}
                 setValue={(value) => setFormData({ ...formData, review: value })}
+                help={reviewHelp}
             />
 
             <FormSelect label="Rating" name="rating" id="rating" value={formData.rating} setValue={(value) => setFormData({ ...formData, rating: value })} >

@@ -15,8 +15,8 @@ export default function FormTextArea({ label, id, name, placeholder, help, requi
                 onChange={(e) => setValue(e.target.value)}
             ></textarea>
 
-            <small id="helpId" className="form-text text-body-secondary">
-                {help}
+            <small id="helpId" className={help.type === 'error' ? 'text-danger' : 'text-body-secondary'}>
+                {help.message}
             </small>
         </div>
     );
