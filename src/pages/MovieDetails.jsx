@@ -1,57 +1,71 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
 import ReviewsList from "../components/ReviewsList";
+import MainCard from "../components/MainCard";
+import ReviewsForm from "../components/ReviewsForm";
 
 export default function MovieDetails() {
 
-    const [movie, setMovie] = useState({});
+    const endpoint = import.meta.env.VITE_API_SERVER_ADDRESS
+
     const { movieId } = useParams();
+
+    const [movie, setMovie] = useState({});
+    const [reviews, setReviews] = useState([]);
+
+    const [formData, setFormData] = useState({
+        rating: 5,
+        review: "",
+        movie_id: movieId
+    });
+
 
     useEffect(() => {
         const endpoint = import.meta.env.VITE_API_SERVER_ADDRESS + "/movies/" + movieId;
 
         fetch(endpoint)
             .then(res => res.json())
-            .then(data => setMovie(data))
+            .then(data => {
+                setMovie(data);
+                setReviews(data.reviews);
+            })
             .catch(err => console.log(err))
-    }, [movieId])
 
+    }, [movieId, reviews])
 
     return (
         <main>
-            <section id="details">
-                <div className="jumbo">
-                    <img src={import.meta.env.VITE_API_SERVER_ADDRESS + "/img/" + movie.image} alt={movie.title} />
-                </div>
+            <section id="details" className="mb-4">
 
-                <div className="container py-4">
-                    <h2>{movie.title}</h2>
-                    <p>{movie.description}</p>
+                <div className="p-5 mb-4 rounded-3">
+                    <div className="container">
+                        <div className="d-flex flex-column flex-md-row gap-4">
 
-                    <div className="row">
-                        <div className="col">
-                            <div className="card">
-                                <div className="card-body">
-                                    <h3>{movie.director}</h3>
-                                    <p>Regista</p>
-                                </div>
-                            </div>
-                        </div>
+                            <img src={endpoint + "/img/" + movie.image} alt={movie.title} className="object-fit-cover" style={{ height: 350 }} />
 
-                        <div className="col">
-                            <div className="card">
-                                <div className="card-body">
-                                    <h3>{movie.genre}</h3>
-                                    <p>Genere</p>
-                                </div>
-                            </div>
-                        </div>
+                            <div>
 
-                        <div className="col">
-                            <div className="card">
-                                <div className="card-body">
-                                    <h3>{movie.duration} min</h3>
-                                    <p>Durata</p>
+                                <h1 className="display-5 fw-bold">
+                                    {movie.title}
+                                </h1>
+
+                                <p className="fs-4">
+                                    {movie.description}
+                                </p>
+
+                                <div className="row row-cols-3 g-4 mt-4">
+                                    <div className="col">
+                                        <MainCard title="Director" description={movie.director} />
+                                    </div>
+
+                                    <div className="col">
+                                        <MainCard title="Release Year" description={movie.release_date ? new Date(movie.release_date).getFullYear() : ""} />
+                                    </div>
+
+                                    <div className="col">
+                                        <MainCard title="Director" description={movie.director} />
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -59,29 +73,15 @@ export default function MovieDetails() {
                 </div>
             </section>
 
-            <section id="reviews">
+            <section id="reviews" className="p-5">
                 <div className="container">
+                    <ReviewsList reviews={reviews} />
 
-                    <h2>Recensioni</h2>
+                    <hr className="m-4" />
 
-                    <form className="my-4">
-                        <div className="mb-3">
-                            <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                            <input type="password" className="form-control" id="exampleInputPassword1" />
-                        </div>
-                        <div className="mb-3 form-check">
-                            <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                            <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-                        </div>
-                        <button type="submit" className="btn btn-primary">Submit</button>
-                    </form>
+                    <h2>Leave a review</h2>
 
-                    <ReviewsList reviews={movie.reviews} />
+                    <ReviewsForm formData={formData} setFormData={setFormData} reviews={reviews} setReviews={setReviews} />
                 </div>
             </section>
         </main >

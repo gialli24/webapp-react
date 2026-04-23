@@ -2,10 +2,12 @@ import ReviewCard from "./ReviewCard";
 
 export default function ReviewsList({ reviews }) {
     return (
-        <div className="row">
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             {
                 reviews?.map(review => (
-                    <ReviewCard key={review.id} review={review} />
+                    <div key={review.id} className="col">
+                        <ReviewCard review={review} />
+                    </div>
                 ))
             }
         </div>

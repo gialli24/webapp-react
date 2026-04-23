@@ -11,14 +11,12 @@ export default function ReviewCard({ review }) {
     }
 
     return (
-        <div className="col-md-6" key={review.id}>
-            <div className="card">
-                <div className="card-body">
-                    <h5 className="card-title">
-                        {stars}
-                    </h5>
-                    <p>{review.review}</p>
-                </div>
+        <div className="card">
+            <div className="card-body">
+                <div className="mb-3">{stars}</div>
+                <p>
+                    {review.review}
+                </p>
             </div>
         </div>
     )
