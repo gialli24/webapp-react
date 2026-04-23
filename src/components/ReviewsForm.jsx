@@ -1,7 +1,16 @@
+import { useState } from "react";
 import FormSelect from "./FormSelect";
 import FormTextArea from "./FormTextArea";
 
-export default function ReviewsForm({ formData, setFormData, reviews, setReviews }) {
+export default function ReviewsForm({ setRefreshReviews, movieId }) {
+
+    const [submissionResponse, setSubmissionResponse] = useState({});
+
+    const [formData, setFormData] = useState({
+        rating: 5,
+        review: "",
+        movie_id: movieId
+    });
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -17,14 +26,24 @@ export default function ReviewsForm({ formData, setFormData, reviews, setReviews
         })
             .then(res => res.json())
             .then(data => {
-                setReviews([...reviews, data])
+                setSubmissionResponse(data);
+
+                if (data.type === "success") {
+                    setRefreshReviews(true);
+                }
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+            })
 
     }
 
     return (
         <form onSubmit={e => { handleSubmit(e) }}>
+
+            {submissionResponse.type === "success" && <div className="alert alert-success" role="alert">{submissionResponse.message}</div>}
+            {submissionResponse.type === 'error' && <div className="alert alert-danger" role="alert">{submissionResponse.message}</div>}
+
             <FormTextArea
                 label="Review"
                 placeholder="Write here"

@@ -11,7 +11,7 @@ export default function ReviewCard({ review }) {
     }
 
     return (
-        <div className="card">
+        <div className="card h-100">
             <div className="card-body">
                 <div className="mb-3">{stars}</div>
                 <p>

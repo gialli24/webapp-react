@@ -13,11 +13,7 @@ export default function MovieDetails() {
     const [movie, setMovie] = useState({});
     const [reviews, setReviews] = useState([]);
 
-    const [formData, setFormData] = useState({
-        rating: 5,
-        review: "",
-        movie_id: movieId
-    });
+    const [refreshReviews, setRefreshReviews] = useState(false);
 
 
     useEffect(() => {
@@ -28,10 +24,11 @@ export default function MovieDetails() {
             .then(data => {
                 setMovie(data);
                 setReviews(data.reviews);
+                setRefreshReviews(false);
             })
             .catch(err => console.log(err))
 
-    }, [movieId, reviews])
+    }, [movieId, refreshReviews])
 
     return (
         <main>
@@ -81,7 +78,7 @@ export default function MovieDetails() {
 
                     <h2>Leave a review</h2>
 
-                    <ReviewsForm formData={formData} setFormData={setFormData} reviews={reviews} setReviews={setReviews} />
+                    <ReviewsForm setRefreshReviews={setRefreshReviews} movieId={movieId} />
                 </div>
             </section>
         </main >
