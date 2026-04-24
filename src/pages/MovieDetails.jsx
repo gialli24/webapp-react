@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import ReviewsList from "../components/ReviewsList";
 import MainCard from "../components/MainCard";
 import ReviewsForm from "../components/ReviewsForm";
+import { useGlobalContext } from "../contexts/GlobalContext";
 
 export default function MovieDetails() {
 
@@ -15,9 +16,13 @@ export default function MovieDetails() {
 
     const [refreshReviews, setRefreshReviews] = useState(false);
 
+    const { setIsLoading } = useGlobalContext();
+
 
     useEffect(() => {
         const endpoint = import.meta.env.VITE_API_SERVER_ADDRESS + "/movies/" + movieId;
+
+        setIsLoading(true);
 
         fetch(endpoint)
             .then(res => res.json())
@@ -25,6 +30,7 @@ export default function MovieDetails() {
                 setMovie(data);
                 setReviews(data.reviews);
                 setRefreshReviews(false);
+                setIsLoading(false);
             })
             .catch(err => console.log(err))
 
